@@ -9,7 +9,7 @@ Square = namedtuple("Square", "top_left_x top_left_y bottom_right_x bottom_right
 
 TOTAL_CPU = multiprocessing.cpu_count()
 STAT_FILENAME = "/proc/stat"
-THRESHOLD = 10
+THRESHOLD = 3
 SQUARE_SIZE = int(math.sqrt(64*64 / TOTAL_CPU))
 SQUARES_PER_ROW = int(64 / SQUARE_SIZE)
 PIXOO_REST_URL = "http://localhost:5000/rectangle"
