@@ -14,9 +14,10 @@ SQUARE_SIZE = int(math.sqrt(64*64 / TOTAL_CPU))
 SQUARES_PER_ROW = int(64 / SQUARE_SIZE)
 PIXOO_REST_URL = "http://localhost:5000/rectangle"
 SEND_TO_PIXOO = True
+CLEAR = True
 
-def color_rectangles(results, squares):
-    for i in range(TOTAL_CPU):
+def color_rectangles(results, squares, size=TOTAL_CPU):
+    for i in range(size):
         if results[i] is True:
             sq = squares[i]
             data = {
@@ -54,13 +55,15 @@ for i in range(4):
         ub_x = x + SQUARE_SIZE
         if j == 0:
             ub_x -= 1
-        squares.append(Square(x, y, ub_x, ub_y))
+        squares.append(Square(x+1, y+1, ub_x-1, ub_y-1))
         x = ub_x
     x = 0
     y = ub_y
 
-
 print(squares)
+
+if CLEAR:
+    color_rectangles([False], [Square(0, 0, 63, 63)], size=1)
 
 states = [State(0, 0) for i in range(TOTAL_CPU)]
 results = [False for i in range(TOTAL_CPU)]
@@ -95,6 +98,6 @@ while True:
 
 
 ## Other ideas:
-# 1. Make each square a slightly different color
-# 2. Add padding to each square
-# 3.
+# - [ ]  Make each square a slightly different color
+# - [ ] Add padding to each square
+# - [ ] Blink each square
